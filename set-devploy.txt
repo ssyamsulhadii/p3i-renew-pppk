@@ -1,0 +1,23 @@
+Tambahakan Kode berikut untuk penyesuaian migrasi
+DB_DATABASE=
+DB_USERNAME=
+DB_PASSWORD=
+-----------------------><-----------------------
+APP_URL=https://p3i.bkpsdm.kapuaskab.go.id
+DB_CHARSET=utf8mb4
+DB_COLLATION=utf8mb4_unicode_ci
+-----------------------><-----------------------
+
+ketikkan pwd untuk mengetahui path sekerang
+
+path project 
+/home/bkpsdmkapuaskab/app-projects/p3i-renew-pppk/public
+ptah domain
+/home/bkpsdmkapuaskab/public_html/p3i.bkpsdm.kapuaskab.go.id
+
+from :
+saya ingin membuat symlink dari project saya yang berada /home/bkpsdmkapuaskab/app-projects/p3i-renew-pppk/public diarahkan ke link p3i.bkpsdm.kapuaskab.go.id struktur pathnya speerti ini /home/bkpsdmkapuaskab/public_html/p3i.bkpsdm.kapuaskab.go.id
+
+
+ouput
+ln -s /home/bkpsdmkapuaskab/app-projects/p3i-renew-pppk/public /home/bkpsdmkapuaskab/public_html/p3i.bkpsdm.kapuaskab.go.id
