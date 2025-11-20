@@ -68,20 +68,40 @@ class DataController extends Controller
 
     public function destroy(Data $data)
     {
-        // Daftar kolom file yang ingin dihapus dari storage
+        // Daftar kolom file yang ingin dihapus dari public/
         $fileFields = [
             'surat_pengantar',
+            'surat_sehat',
             'sptjm',
             'skp',
+            'absensi',
             'sk_terakhir',
+            'spk',
             'pas_foto',
         ];
+
         foreach ($fileFields as $field) {
-            if (!empty($data->$field) && Storage::exists(str_replace('storage/', 'public/', $data->$field))) {
-                Storage::delete(str_replace('storage/', 'public/', $data->$field));
+            if (!empty($data->$field)) {
+
+                // Hilangkan prefix "storage/" atau "public/"
+                $cleanPath = str_replace(['storage/', 'public/'], '', $data->$field);
+
+                // Path absolut di public/
+                $absolutePath = public_path($cleanPath);
+
+                // Hapus file jika ada
+                if (file_exists($absolutePath)) {
+                    @unlink($absolutePath);
+                }
             }
         }
+
+        // Hapus data dari database
+        $nip = $data->nip_pppk;
         $data->delete();
-        return redirect()->route('data.index')->with('alert-information', "Data NIP {$data->nip_pppk} berhasil dihapus beserta seluruh file-nya.");
+
+        return redirect()
+            ->route('data.index')
+            ->with('alert-information', "Data NIP {$nip} berhasil dihapus beserta seluruh file-nya.");
     }
 }

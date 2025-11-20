@@ -91,7 +91,7 @@ class UsulPerpanjanganController extends Controller
         $tahun = $masa_perpanjangan->tahun;
         $nip = $request->nip_pppk;
 
-        // Daftar kolom file
+        // Kolom yang akan diproses
         $fileFields = [
             'surat_pengantar',
             'surat_sehat',
@@ -104,26 +104,33 @@ class UsulPerpanjanganController extends Controller
         ];
 
         foreach ($fileFields as $field) {
+
             if ($request->hasFile($field)) {
-                // Jika ada file lama dan filenya eksis, hapus
+
+                // Hapus file lama jika ada
                 if ($data && !empty($data->{$field})) {
-                    $oldPath = str_replace('storage/', 'public/', $data->{$field});
-                    if (Storage::exists($oldPath)) {
-                        Storage::delete($oldPath);
+                    $oldPath = public_path($data->{$field}); // path seperti /public/2026/skp/file.pdf
+                    if (file_exists($oldPath)) {
+                        unlink($oldPath);
                     }
                 }
 
-                // Simpan file baru
                 $file = $request->file($field);
                 $ext = $file->getClientOriginalExtension();
                 $fileName = "{$nip}-{$tahun}.{$ext}";
-                $path = "public/{$tahun}/{$field}";
+                $folder = "public/{$tahun}/{$field}";
+                $publicFolder = public_path("{$tahun}/{$field}");
 
-                // Store file
-                $storedPath = $file->storeAs($path, $fileName);
+                // Buat folder jika belum ada
+                if (!is_dir($publicFolder)) {
+                    mkdir($publicFolder, 0775, true);
+                }
 
-                // Simpan path relatif agar mudah diakses
-                $validated[$field] = str_replace('public/', 'storage/', $storedPath);
+                // Pindahkan file
+                $file->move($publicFolder, $fileName);
+
+                // Path disimpan di database (tanpa "public/")
+                $validated[$field] = "/{$tahun}/{$field}/{$fileName}";
             }
         }
 

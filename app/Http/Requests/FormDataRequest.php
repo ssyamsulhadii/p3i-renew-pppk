@@ -47,14 +47,14 @@ class FormDataRequest extends FormRequest
             'tanggal_lahir' => 'required|date',
             'masa_perpanjangan_id' => 'sometimes',
             // validasi dokumen/file
-            'surat_pengantar' => [$isUpdate ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:512'],
-            'surat_sehat' => [$isUpdate ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:512'],
-            'sptjm' => [$isUpdate ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:512'],
-            'skp' => [$isUpdate ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:512'],
-            'absensi' => [$isUpdate ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:512'],
-            'sk_terakhir' => [$isUpdate ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:512'],
-            'spk' => [$isUpdate ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:512'],
-            'pas_foto' => [$isUpdate ? 'nullable' : 'required', 'file', 'mimes:jpg,jpeg,png', 'max:512'],
+            'surat_pengantar' => [$isUpdate ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:1200'],
+            'surat_sehat' => [$isUpdate ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:1200'],
+            'sptjm' => [$isUpdate ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:1200'],
+            'skp' => [$isUpdate ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:1200'],
+            'absensi' => [$isUpdate ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:1200'],
+            'sk_terakhir' => [$isUpdate ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:1200'],
+            'spk' => [$isUpdate ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:1200'],
+            'pas_foto' => [$isUpdate ? 'nullable' : 'required', 'file', 'mimes:jpg,jpeg,png', 'max:1200'],
         ];
     }
 

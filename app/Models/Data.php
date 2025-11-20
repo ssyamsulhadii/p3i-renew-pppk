@@ -47,18 +47,20 @@ class Data extends Model
         $path = $this->{$column};
 
         if (!$path) {
-            return null; // kolom kosong
+            return asset('images/file-not-found.png');
         }
 
-        // Hilangkan "storage/" di awal agar bisa dicek oleh Storage::exists()
-        $relativePath = str_replace('storage/', '', $path);
+        // Normalisasi path: hapus "public/" di awal jika ada
+        $cleanPath = preg_replace('/^public\//', '', $path);
 
-        // Cek apakah file ada di storage
-        if (Storage::disk('public')->exists($relativePath)) {
-            return asset($path); // gunakan path dari database
+        // Cek file di direktori public
+        $publicPath = public_path($cleanPath);
+
+        if (file_exists($publicPath)) {
+            return asset($cleanPath);
         }
 
-        // fallback jika file tidak ditemukan
+        // fallback jika file hilang
         return asset('images/file-not-found.png');
     }
 }

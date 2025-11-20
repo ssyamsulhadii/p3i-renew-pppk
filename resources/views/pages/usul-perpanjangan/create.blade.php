@@ -34,7 +34,7 @@
                         <x-forms.selection-group label='Jenis Formasi' name="jenis_formasi" :items="$list_jenis_formasi"
                             item="{{ $data->jenis_formasi ?? '' }}" />
                         <x-forms.selection-group label='Jenis Kelamin' name="jenis_kelamin" :items="$list_jenis_kelamin"
-                            item="{{ $pegawai->jenis_kelamin ?? '' }}" />
+                            item="{{ $data->jenis_kelamin ?? '' }}" />
                         <x-forms.input name="tempat_lahir" label="Tempat Lahir" phr="Kapuas"
                             item="{{ $data->tempat_lahir ?? '' }}"></x-forms.input>
                     </div>
@@ -55,7 +55,7 @@
                 </div>
                 <div class="my-5 mt-4">
                     <span role="alert" class="alert alert-warning"><b>Catatan</b> : Selain dari file Pas Foto berformat
-                        pdf dan maksimal file berukuran 500kb.
+                        pdf dan maksimal file berukuran 1000kb/1mb.
                     </span>
                 </div>
                 <div class="row">
