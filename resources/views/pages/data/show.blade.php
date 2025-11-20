@@ -147,8 +147,8 @@
                                 <tr>
                                     <th>Pas foto formal berlatar belakang merah</th>
                                     <td>
-                                        <x-others.alert-view-dokumen dokumen="{{ $data->sk_terakhir ?? '' }}"
-                                            url="{{ $data?->pathFile('sk_terakhir') }}">
+                                        <x-others.alert-view-dokumen dokumen="{{ $data->pas_foto ?? '' }}"
+                                            url="{{ $data?->pathFile('pas_foto') }}">
                                         </x-others.alert-view-dokumen>
                                     </td>
                                 </tr>

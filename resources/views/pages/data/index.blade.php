@@ -74,7 +74,7 @@
                                 <tr>
                                     <td>{{ $list_data->firstItem() + $index }}</td>
                                     <td>
-                                        <a
+                                        <a class="text-decoration-none" target="_blank"
                                             href="{{ route('data.show', ['data' => $item->nip_pppk]) }}">{{ $item->nip_pppk }}</a>
                                     </td>
                                     <td>{{ $item->nama ?? '-' }}</td>

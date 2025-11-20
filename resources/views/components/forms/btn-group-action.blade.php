@@ -1,6 +1,6 @@
 @props(['linkedit', 'linkdelete'])
 
-<a href="{{ $linkedit }}" class="btn btn-secondary px-1 py-1">
+<a href="{{ $linkedit }}" class="btn btn-secondary px-1 py-1" target="_blank">
     <x-icons.icon-edit></x-icons.icon-edit>
 </a>
 
