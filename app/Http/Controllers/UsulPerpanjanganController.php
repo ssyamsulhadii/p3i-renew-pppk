@@ -62,7 +62,7 @@ class UsulPerpanjanganController extends Controller
 
         // handle file upload (hapus lama jika ada)
         $validated = $this->handleFileUploads($request, $validated, $masa, $data);
-
+        $validated['catatan'] = '';
         // update data di database
         $data->update($validated);
 
