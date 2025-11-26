@@ -9,7 +9,8 @@
                     <form action="{{ route('data.update', ['data' => $data->nip_pppk]) }}" method="POST">
                         @csrf @method('PATCH')
                         {{-- <x-forms.input name="catatan" label="Catatan" item="{{ $data->catatan ?? '' }}"></x-forms.input> --}}
-                        <x-forms.textarea name="catatan" label="Catatan" rows="7"></x-forms.textarea>
+                        <x-forms.textarea name="catatan" item="{{ $data->catatan }}" label="Catatan"
+                            rows="7"></x-forms.textarea>
                         <x-forms.input name="status" label="Status" item="{{ $data->status ?? '' }}"></x-forms.input>
                         <x-forms.input-radio name="data_done" label="Data Final"
                             item="{{ $data->data_done ?? '' }}"></x-forms.input-radio>
