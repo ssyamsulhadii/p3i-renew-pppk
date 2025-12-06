@@ -13,9 +13,14 @@ return new class extends Migration
     {
         Schema::create('masa_perpanjangan', function (Blueprint $table) {
             $table->id();
+            $table->string('kode_perpanjangan');
             $table->string('judul');
-            $table->year('tahun');
-            $table->boolean('is_active')->default(false);
+            $table->string('label_unggah_skp');
+            $table->string('label_unggah_absen');
+            $table->string('lampiran')->nullable();
+            $table->string('tte_kolektif')->nullable();
+            $table->json('kode_angkatan');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

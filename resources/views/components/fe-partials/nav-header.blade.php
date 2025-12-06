@@ -4,9 +4,11 @@
             aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-            P3I-BKPSDM | PRODUCTION
-        </h1>
+        <a href="{{ route('beranda') }}">
+            <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+                SIPERPEG | P3I-BKPSDM
+            </h1>
+        </a>
         <div class="navbar-nav flex-row order-md-last">
             @auth
                 <div class="nav-item dropdown">

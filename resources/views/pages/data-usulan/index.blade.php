@@ -2,8 +2,6 @@
 
 @section('content')
     <div class="container mt-4">
-        <h3 class="text-center mb-4">Manajemen Data</h3>
-
         {{-- Notifikasi sukses --}}
         @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
@@ -12,7 +10,7 @@
         {{-- Filter Masa & NIP --}}
         <div class="card mb-3">
             <div class="card-body">
-                <form action="{{ route('data.index') }}" method="GET" class="row g-2 align-items-end">
+                <form action="{{ route('data-usulan.index') }}" method="GET" class="row g-2 align-items-end">
                     <div class="col-md-4">
                         <label class="form-label">Pilih Masa Perpanjangan</label>
                         <select name="masa_perpanjangan_id" class="form-select" required>
@@ -20,7 +18,7 @@
                             @foreach ($list_masa_perpanjangan as $masa)
                                 <option value="{{ $masa->id }}"
                                     {{ request('masa_perpanjangan_id') == $masa->id ? 'selected' : '' }}>
-                                    {{ $masa->nama_periode ?? 'Periode ' . $masa->tahun }}
+                                    {{ $masa->nama_periode ?? 'Periode ' . $masa->kode_perpanjangan }}
                                 </option>
                             @endforeach
                         </select>
@@ -28,17 +26,13 @@
 
                     @if (request()->filled('masa_perpanjangan_id'))
                         <div class="col-md-4">
-                            <label class="form-label">Cari NIP PPPK (opsional)</label>
-                            <input type="number" name="nip_pppk" class="form-control" placeholder="Masukkan NIP PPPK"
-                                value="{{ request('nip_pppk') }}">
+                            <label class="form-label">Cari Data (opsional)</label>
+                            <input type="text" name="keyword" class="form-control" placeholder="Masukkan Nama / NIP"
+                                value="{{ request('keyword') }}">
                         </div>
 
                         <div class="col-md-2">
                             <button type="submit" class="btn btn-primary w-100">Tampilkan</button>
-                        </div>
-
-                        <div class="col-md-2">
-                            <a href="{{ route('data.index') }}" class="btn btn-secondary w-100">Reset</a>
                         </div>
                     @else
                         <div class="col-md-2">
@@ -53,20 +47,15 @@
         @if ($list_data->count() > 0)
             <div class="card">
                 <div class="card-body">
-                    <a href="{{ route('pegawai.rinder', ['masa' => request('masa_perpanjangan_id')]) }}"
-                        class="btn btn-success mb-3">
-                        <i class="bi bi-file-earmark-excel"></i> Export Excel
-                    </a>
                     <table class="table table-bordered table-striped">
                         <thead class="table-light">
                             <tr>
                                 <th>No</th>
-                                <th>NIP PPPK</th>
                                 <th>Nama</th>
                                 <th>Catatan</th>
                                 <th>Status</th>
-                                <th>Data Final</th>
-                                <th>Aksi</th>
+                                <th class="text-center" style="width: 180px">Data Final</th>
+                                <th class="text-center">Menu</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -74,16 +63,34 @@
                                 <tr>
                                     <td>{{ $list_data->firstItem() + $index }}</td>
                                     <td>
-                                        <a class="text-decoration-none" target="_blank"
-                                            href="{{ route('data.show', ['data' => $item->nip_pppk]) }}">{{ $item->nip_pppk }}</a>
+                                        <a href="{{ route('detail.koper', ['koper' => $item->id]) }}"
+                                            class="text-decoration-none">
+                                            {{ $item->user->nama }} <br> NIP. {{ $item->user->nip }}
+                                        </a>
                                     </td>
-                                    <td>{{ $item->nama ?? '-' }}</td>
                                     <td>{{ $item->catatan ?? '-' }}</td>
                                     <td>{{ $item->status ?? '-' }}</td>
-                                    <td>{{ $item->data_done ? 'Lengkap' : 'Kurang' }}</td>
                                     <td class="text-center">
-                                        <x-forms.btn-group-action linkedit="{{ route('data.edit', $item->nip_pppk) }}"
-                                            linkdelete="{{ route('data.destroy', $item->nip_pppk) }}">
+                                        <a href="{{ route('data-usulan.isDone', ['data_usulan' => $item->id]) }}"
+                                            class="text-decoration-none">
+                                            @if ($item->is_done)
+                                                <span class="badge bg-indigo text-indigo-fg">Lengkap</span>
+                                            @else
+                                                <span class="badge bg-red text-red-fg">Kurang</span>
+                                            @endif
+                                        </a>
+                                        <a href="{{ route('data-usulan.isEdit', ['data_usulan' => $item->id]) }}"
+                                            class="text-decoration-none">
+                                            @if ($item->is_edit)
+                                                <span class="badge bg-success text-success-fg">Edit Lable</span>
+                                            @else
+                                                <span class="badge bg-red  text-red-fg">Enable</span>
+                                            @endif
+                                        </a>
+                                    </td>
+                                    <td class="text-center">
+                                        <x-forms.btn-group-action target="_blank"
+                                            linkedit="{{ route('data-usulan.edit', ['data_usulan' => $item->id]) }}">
                                         </x-forms.btn-group-action>
                                     </td>
                                 </tr>

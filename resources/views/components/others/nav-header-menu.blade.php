@@ -3,40 +3,49 @@
         <div class="navbar">
             <div class="container-xl">
                 <ul class="navbar-nav m-lg-auto">
-                    @auth
+                    @if (auth()->user()->level == 'member')
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('beranda') }}">
                                 <span class="nav-link-title">Beranda</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('masa-perpanjangan.index') }}">
-                                <span class="nav-link-title">Mas Perpanjangan</span></a>
+                            <a class="nav-link" href="{{ route('usul-perpanjangan.form') }}">
+                                <span class="nav-link-title">Usul Perpanjangan</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('data.index') }}">
-                                <span class="nav-link-title">Manajemen Data</span></a>
+                            <a class="nav-link" href="{{ route('data_informasi') }}">
+                                <span class="nav-link-title">Data Informasi</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('setup_user') }}">
+                                <span class="nav-link-title">Pengaturan Akun</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('contoh_dokumen') }}">
+                                <span class="nav-link-title">Contoh Dokumen</span></a>
                         </li>
                     @else
-                        <li class="nav-item ">
-                            <a href="{{ route('data-diteriam.show_revise') }}"
-                                class="bg-purple p-2 rounded-2 text-white nav-link">
-                                <b>Perbaikan Data</b>
-                            </a>
-                        </li>
-                        <li class="nav-item mx-3">
-                            <a href="{{ route('usul-perpanjangan.form') }}" class="nav-link">
-                                <span class="nav-link-title">
-                                    <b>FORM INFORMATION</b>
-                                </span>
-                            </a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('masa-perpanjangan.index') }}">
+                                <span class="nav-link-title">Masa Perpanjangan</span></a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('data-diteriam.show_accept') }}"
-                                class="bg-success p-2 rounded-2 text-white nav-link">
-                                <b>Data Diterima</b>
-                            </a>
+                            <a class="nav-link" href="{{ route('data-pegawai.index') }}">
+                                <span class="nav-link-title">Data Pegawai</span></a>
                         </li>
-                    @endauth
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('data-usulan.index') }}">
+                                <span class="nav-link-title">Data Usulan</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('detail-usulan.index') }}">
+                                <span class="nav-link-title">Detail Usulan</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('setup_user') }}">
+                                <span class="nav-link-title">Pengaturan Akun</span></a>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>

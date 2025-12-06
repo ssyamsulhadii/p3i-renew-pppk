@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-md-6 col-xl-12">
                     <form action="{{ route('masa-perpanjangan.update', ['masa_perpanjangan' => $masa_perpanjangan->id]) }}"
-                        method="POST">
+                        enctype="multipart/form-data" method="POST">
                         @csrf @method('PATCH')
                         @include('pages.masa-perpanjangan.form')
                     </form>

@@ -21,10 +21,18 @@ class FormMasaPerpanjanganRequest extends FormRequest
      */
     public function rules(): array
     {
+        $isUpdate = in_array($this->method(), ['PUT', 'PATCH']);
+        $id = $this->masa_perpanjangan ? $this->masa_perpanjangan->id : '';
         return [
-            'judul' => 'required|string',
-            'tahun' => 'required|string',
-            'is_active' => 'required|in:0,1',
+            'kode_perpanjangan'   => 'required|string|unique:masa_perpanjangan,kode_perpanjangan,' . $id,
+            'judul'               => 'required|string|max:255',
+            'label_unggah_skp'    => 'required|string|max:255',
+            'label_unggah_absen'  => 'required|string|max:255',
+            'kode_angkatan'       => 'required|array',
+            'kode_angkatan.*'     => 'string',
+            'is_active'           => 'required|in:0,1',
+            'lampiran'            => $isUpdate ? 'nullable' : 'required' . '|file|mimes:pdf|max:2048',
+            'tte_kolekftif'        => 'nullable|file|mimes:jpg,jpeg,png|max:2048',
         ];
     }
 

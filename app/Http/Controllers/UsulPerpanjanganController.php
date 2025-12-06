@@ -3,41 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\FormDataRequest;
-use App\Models\Data;
+use App\Models\KontrakPerpanjangan;
 use App\Models\MasaPerpanjangan;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class UsulPerpanjanganController extends Controller
 {
     // Tampilkan form usul
     public function create(Request $request)
     {
-        $masa = MasaPerpanjangan::where('is_active', true)->firstOrFail();
-        $data = null;
-
-        // Jika user mencari berdasarkan NIP PPPK
-        if ($request->filled('nip_pppk')) {
-            $data = Data::where('nip_pppk', $request->nip_pppk)
-                ->where('masa_perpanjangan_id', $masa->id)
-                ->first();
-
-            if (!$data) {
-                // Jika tidak ditemukan
-                session()->flash('alert-warning', 'Data tidak ditemukan untuk NIP tersebut.');
-            } elseif ($data->data_done == false) {
-                // Jika data perlu diperbaiki
-                session()->flash('alert-warning', $data->catatan);
-            } elseif ($data->data_done == true) {
-                // Jika data sudah diterima
-                session()->flash('alert-information', 'Data anda sudah kami terima.');
-                // Data tidak perlu ditampilkan
-                $data = null;
+        if (Auth::user()->is_done) {
+            $masa = MasaPerpanjangan::where('is_active', true)->first();
+            $user_kode = Auth::user()->kode_angkatan;
+            if (is_null($masa)) {
+                return view('pages.usul-perpanjangan.not-page');
+            } elseif (in_array($user_kode, $masa->kode_angkatan) && $masa->is_active) {
+                $kontrak_saya = KontrakPerpanjangan::where('user_id', Auth::id())->where('masa_perpanjangan_id', $masa->id)->first();
+                if ($kontrak_saya) {
+                    return view('pages.usul-perpanjangan.edit', compact('kontrak_saya', 'masa'));
+                }
+                return view('pages.usul-perpanjangan.create', compact('masa'));
             }
+            return abort(404);
+        } else {
+            return to_route('data_informasi');
         }
-        $list_jenis_kelamin = $this->jenisKelamin();
-        $list_jenis_formasi = $this->jenisFormasi();
-        return view('pages.usul-perpanjangan.create', compact('masa', 'data', 'list_jenis_kelamin', 'list_jenis_formasi'));
     }
 
 
@@ -45,92 +37,117 @@ class UsulPerpanjanganController extends Controller
     public function store(FormDataRequest $request)
     {
         $validated = $request->validated();
-        $validated['data_done'] = true;
-        $validated['status'] = 'Data dalam tahap verifikasi admin.';
         $masa_perpanjangan = MasaPerpanjangan::find($request->masa_perpanjangan_id);
         // Proses upload file & update field
         $validated = $this->handleFileUploads($request, $validated, $masa_perpanjangan);
-        Data::create($validated);
-        return back()->with('alert-information', 'Data berhasil disimpan.');
+        $dataKontrak = $this->getTmtKontrak(Auth::user());
+        $validated['tmt_awal']  = $dataKontrak['tmt_awal'];
+        $validated['tmt_akhir'] = $dataKontrak['tmt_akhir'];
+        KontrakPerpanjangan::create($validated);
+        return back()->with('alert-information', 'Dokumen berhasil dikirim, mohon tunggu verifikasi admin terimakasih . . .');
     }
 
-    public function update(FormDataRequest $request, Data $data)
+    public function update(FormDataRequest $request, KontrakPerpanjangan $kontrak_perpanjangan)
     {
-        $masa = $data->masaPerpanjangan; // ambil relasi masa perpanjangan
         $validated = $request->validated();
-        $validated['data_done'] = true;
-
-        // handle file upload (hapus lama jika ada)
-        $validated = $this->handleFileUploads($request, $validated, $masa, $data);
-        $validated['catatan'] = '';
-        // update data di database
-        $data->update($validated);
-
-        return back()->with('alert-information', 'Data berhasil diperbarui.');
+        $masa_perpanjangan = MasaPerpanjangan::find($request->masa_perpanjangan_id);
+        // Proses upload file & update field
+        $validated = $this->handleFileUploads($request, $validated, $masa_perpanjangan, $kontrak_perpanjangan);
+        $validated['catatan'] = '-';
+        $validated['status'] = 'Dokumen tahap verifikasi.';
+        $kontrak_perpanjangan->update($validated);
+        return back()->with('alert-success', 'Dokumen berhasil dikirim, mohon tunggu verifikasi admin terimakasih . . .');
     }
 
-    private function jenisKelamin()
+    public function finalUsul(Request $request, KontrakPerpanjangan $kontrak_perpanjangan)
     {
-        return json_decode(json_encode([
-            ['id' => 'L', 'nama' => 'Laki-Laki'],
-            ['id' => 'P', 'nama' => 'Perempuan'],
-        ]));
+        $validated = $request->validate(['spk_final' => 'required|mimes:pdf|max:1200']);
+        $validated = $this->handleFileUploads($request, $validated, $kontrak_perpanjangan->masaPerpanjangan);
+        $validated['is_done'] = true;
+        $validated['is_edit'] = false;
+        $kontrak_perpanjangan->update($validated);
+        return back()->with('alert-success', 'Dokumen SPK berhasil dikirim.');
     }
-    private function jenisFormasi()
+
+    private function getTmtKontrak(User $user): array
     {
-        return json_decode(json_encode([
-            ['id' => 'PPPK Guru', 'nama' => 'PPPK Guru'],
-            ['id' => 'PPPK Kesehatan', 'nama' => 'PPPK Kesehatan'],
-            ['id' => 'PPPK Teknis', 'nama' => 'PPPK Teknis'],
-        ]));
+        // Ambil kontrak terakhir
+        $latest = KontrakPerpanjangan::where('user_id', $user->id)
+            ->latest()
+            ->first();
+
+        // Batas akhir kerja (tanggal lahir + BUP)
+        $tanggalAkhirKerja = $user->tanggal_lahir
+            ->copy()
+            ->addYears($user->bup);
+
+        // Tentukan TMT awal
+        $tmtAwal = ($latest?->tmt_akhir ?? $user->tmt_akhir)
+            ->copy()
+            ->addDay();
+
+        // Hitung TMT akhir 5 tahun
+        $tmtAkhirCalon = $tmtAwal->copy()->addYears(5)->subDay();
+
+        // Jika lewat batas pensiun → pakai tanggal pensiun
+        $tmtAkhir = $tmtAkhirCalon->lessThanOrEqualTo($tanggalAkhirKerja)
+            ? $tmtAkhirCalon
+            : $tanggalAkhirKerja;
+
+        return [
+            'tmt_awal'  => $tmtAwal,
+            'tmt_akhir' => $tmtAkhir,
+        ];
     }
+
+
 
 
     private function handleFileUploads($request, array $validated, $masa_perpanjangan, $data = null)
     {
-        $tahun = $masa_perpanjangan->tahun;
-        $nip = $request->nip_pppk;
+        $kode_perpanjangan = $masa_perpanjangan->kode_perpanjangan;
 
-        // Kolom yang akan diproses
+        // Kolom file yang diproses
         $fileFields = [
             'surat_pengantar',
             'surat_sehat',
             'sptjm',
             'skp',
-            'absensi',
-            'sk_terakhir',
-            'spk',
-            'pas_foto',
+            'rekap_absensi',
+            'spk_final',
         ];
 
         foreach ($fileFields as $field) {
 
             if ($request->hasFile($field)) {
 
-                // Hapus file lama jika ada
+                // Hapus file lama (jika ada)
                 if ($data && !empty($data->{$field})) {
-                    $oldPath = public_path($data->{$field}); // path seperti /public/2026/skp/file.pdf
+
+                    $oldPath = public_path("{$kode_perpanjangan}/{$field}/" . $data->{$field});
+
                     if (file_exists($oldPath)) {
                         unlink($oldPath);
                     }
                 }
 
                 $file = $request->file($field);
-                $ext = $file->getClientOriginalExtension();
-                $fileName = "{$nip}-{$tahun}.{$ext}";
-                $folder = "public/{$tahun}/{$field}";
-                $publicFolder = public_path("{$tahun}/{$field}");
 
-                // Buat folder jika belum ada
+                // Gunakan nama random dari Laravel
+                $fileName = $file->hashName();
+
+                $publicFolder = public_path("{$kode_perpanjangan}/{$field}");
+
+                // Pastikan folder tersedia
                 if (!is_dir($publicFolder)) {
                     mkdir($publicFolder, 0775, true);
                 }
 
-                // Pindahkan file
+                // Upload file
                 $file->move($publicFolder, $fileName);
 
-                // Path disimpan di database (tanpa "public/")
-                $validated[$field] = "/{$tahun}/{$field}/{$fileName}";
+                // Simpan HANYA nama file di database
+                $validated[$field] = $fileName;
             }
         }
 

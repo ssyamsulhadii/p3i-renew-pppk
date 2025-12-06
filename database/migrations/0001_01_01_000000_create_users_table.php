@@ -15,9 +15,22 @@ return new class extends Migration
             $table->id();
             $table->string('username');
             $table->string('password');
-            // $table->string('email')->unique();
-            // $table->timestamp('email_verified_at')->nullable();
-            // $table->rememberToken();
+            $table->string('nama');
+            $table->string('tempat_lahir')->nullable();
+            $table->date('tanggal_lahir')->nullable();
+            $table->string('pendidikan')->nullable();
+            $table->string('jabatan')->nullable();
+            $table->string('unit_kerja')->nullable();
+            $table->enum('jenis_formasi', ['PPPK TEKNIS', 'PPPK KESEHATAN', "PPPK GURU"])->nullable();
+            $table->char('kode_angkatan', 10)->nullable();
+            $table->date('tmt_awal')->nullable();
+            $table->date('tmt_akhir')->nullable();
+            $table->year('bup')->nullable();
+            $table->string('sk')->nullable();
+            $table->string('spk')->nullable();
+            $table->boolean('is_done')->default(false);
+            $table->enum('level', ['admin', 'member'])->default('member');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
 

@@ -1,15 +1,15 @@
 @extends('layouts.app')
 @section('content')
     <x-others.container-form>
-        <x-others.card-header-in-action title="Masa Perpanjangan / Form Tambah" link="{{ route('masa-perpanjangan.index') }}"
+        <x-others.card-header-in-action title="Data Pegawai / Form Tambah" link="{{ route('data-pegawai.index') }}"
             action="Kembali">
         </x-others.card-header-in-action>
         <div class="card-body">
             <div class="row">
-                <div class="col-md-6 col-xl-12">
-                    <form action="{{ route('masa-perpanjangan.store') }}" method="POST" enctype="multipart/form-data">
+                <div class="col-md-6 col-lg-12">
+                    <form action="{{ route('data-pegawai.index') }}" method="POST">
                         @csrf
-                        @include('pages.masa-perpanjangan.form')
+                        @include('pages.data-pegawai.form')
                     </form>
                 </div>
             </div>
