@@ -23,7 +23,12 @@
         <x-forms.input name="unit_kerja" label="Unit Kerja"
             item="{{ $data_pegawai->unit_kerja ?? '' }}"></x-forms.input>
         <x-forms.input name="jabatan" label="Jabatan" item="{{ $data_pegawai->jabatan ?? '' }}"></x-forms.input>
-        <x-forms.input name="password" label="Password" item="" type="password" phr="*****"></x-forms.input>
+        <x-forms.input name="bup" label="Batas Usia Pensiun (BUP)" item="{{ $data_pegawai->bup ?? '' }}"
+            type="number"></x-forms.input>
+        @isset($data_pegawai)
+            <x-forms.input name="password" label="Password" item="" type="password" phr="*****" readonly
+                onfocus="this.removeAttribute('readonly');"></x-forms.input>
+        @endisset
         <x-forms.input name="tmt_akhir" label="TMT Akhir"
             item="{{ isset($data_pegawai) ? $data_pegawai->tmt_akhir->format('Y-m-d') : '' }}" type="date">
         </x-forms.input>

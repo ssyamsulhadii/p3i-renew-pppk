@@ -11,10 +11,10 @@
         <div class="card mb-3">
             <div class="card-body">
                 <form action="{{ route('data-usulan.index') }}" method="GET" class="row g-2 align-items-end">
-                    <div class="col-md-4">
-                        <label class="form-label">Pilih Masa Perpanjangan</label>
+                    <div class="col-md-2">
+                        {{-- <label class="form-label">Pilih Masa Perpanjangan</label> --}}
                         <select name="masa_perpanjangan_id" class="form-select" required>
-                            <option value="">-- Pilih Masa --</option>
+                            <option value="">-- Pilih Masa Perpanjangan--</option>
                             @foreach ($list_masa_perpanjangan as $masa)
                                 <option value="{{ $masa->id }}"
                                     {{ request('masa_perpanjangan_id') == $masa->id ? 'selected' : '' }}>
@@ -25,18 +25,30 @@
                     </div>
 
                     @if (request()->filled('masa_perpanjangan_id'))
-                        <div class="col-md-4">
-                            <label class="form-label">Cari Data (opsional)</label>
+                        <div class="col-md-2">
+                            <select class="form-select" name="status">
+                                <option value="">Pilih Status</option>
+                                <option @selected(request('status') == 'Dokumen Perbaikan') value="Dokumen Perbaikan">Dokumen Perbaikan</option>
+                                <option @selected(request('status') == 'Dokumen Verifikasi') value="Dokumen Verifikasi">Dokumen Verifikasi</option>
+                                <option @selected(request('status') == 'Dokumen Diterima') value="Dokumen Diterima">Dokumen Diterima</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
                             <input type="text" name="keyword" class="form-control" placeholder="Masukkan Nama / NIP"
                                 value="{{ request('keyword') }}">
                         </div>
-
-                        <div class="col-md-2">
-                            <button type="submit" class="btn btn-primary w-100">Tampilkan</button>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-primary">Tampilkan</button>
+                            @if ($list_data->count() > 0)
+                                <a href="{{ route('data-usulan.export.excel', ['masa_pepranjangan' => request('masa_perpanjangan_id'), 'status' => request('status')]) }}"
+                                    class="btn btn-success">Export Excel</a>
+                            @endif
+                            <button style="cursor: none" class="btn border-black">Total Data <span
+                                    class="badge bg-orange text-orange-fg ms-2">{{ $list_data->count() }}</span></button>
                         </div>
                     @else
                         <div class="col-md-2">
-                            <button type="submit" class="btn btn-primary w-100">Lihat Data</button>
+                            <button type="submit" class="btn btn-primary">Lihat Data</button>
                         </div>
                     @endif
                 </form>

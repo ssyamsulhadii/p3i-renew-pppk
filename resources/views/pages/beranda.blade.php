@@ -29,7 +29,7 @@
                                     </svg>
                                 </span>
                                 <div>
-                                    <h3 class="card-title m-0 text-primary fw-bold">Selamat Datang,
+                                    <h3 class="card-title m-0 text-primary fw-bold">Selamat Datang
                                         {{ auth()->user()->nama }}
                                     </h3>
                                     <div class="text-muted">NIP: {{ auth()->user()->nip }}</div>
@@ -149,7 +149,7 @@
                                     </svg>
                                 </span>
                                 <div>
-                                    <h3 class="card-title m-0 text-primary fw-bold">Selamat Datang,
+                                    <h3 class="card-title m-0 text-primary fw-bold">Selamat Datang
                                         {{ auth()->user()->nama }}
                                     </h3>
                                     <div class="text-muted">Bidang Pengadaan Pemberhentian Penghargaan dan Informasi</div>

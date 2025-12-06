@@ -20,6 +20,8 @@
                         disabled></x-forms.input>
                     <x-forms.input name="x4" label="TMT Selesai" phr="{{ $user->tmt_akhir->isoFormat('DD-MM-YYYY') }}"
                         disabled></x-forms.input>
+                    <x-forms.input name="x5" label="Batas Usia Pensiun (BUP)" phr="{{ $user->bup }} Tahun"
+                        disabled></x-forms.input>
 
 
                     @if (!$user->is_done)

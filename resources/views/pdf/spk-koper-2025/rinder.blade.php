@@ -1,0 +1,9 @@
+@extends('pdf.spk-koper-2025.pdf')
+@section('content')
+    @include('pdf.spk-koper-2025.halaman-1')
+    @include('pdf.spk-koper-2025.halaman-2')
+    @include('pdf.spk-koper-2025.halaman-3')
+    @include('pdf.spk-koper-2025.halaman-4')
+    @include('pdf.spk-koper-2025.halaman-5')
+    @include('pdf.spk-koper-2025.halaman-6')
+@endsection

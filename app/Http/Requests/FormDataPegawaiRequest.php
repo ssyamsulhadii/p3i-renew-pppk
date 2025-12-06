@@ -34,6 +34,7 @@ class FormDataPegawaiRequest extends FormRequest
             'username' => 'required|string|unique:users,username,' . $id,
             'password' => 'required|string',
             'nama' => 'required|string',
+            'bup' => 'required',
             'tanggal_lahir' => 'required|string',
             'tempat_lahir' => 'required|string',
             'pendidikan' => 'required|string',

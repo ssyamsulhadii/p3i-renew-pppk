@@ -8,6 +8,8 @@ use App\Models\MasaPerpanjangan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\ServicePdf;
+use Carbon\Carbon;
 
 class UsulPerpanjanganController extends Controller
 {
@@ -68,6 +70,42 @@ class UsulPerpanjanganController extends Controller
         $kontrak_perpanjangan->update($validated);
         return back()->with('alert-success', 'Dokumen SPK berhasil dikirim.');
     }
+
+    public function cetakSpk(KontrakPerpanjangan $kontrak_perpanjangan, ServicePdf $pdf)
+    {
+        if (Auth::id() === $kontrak_perpanjangan->user_id) {
+            $user = $kontrak_perpanjangan->user;
+
+            $ttl = $user->tempat_lahir . ', ' . $user->tanggal_lahir->isoFormat('DD MMMM YYYY');
+            $tmt_awal = $user->tmt_awal ? Carbon::parse($user->tmt_awal)->format('d F Y') : '-';
+
+            $masaKerja = '-';
+            if ($user->tmt_awal) {
+                $start = Carbon::parse($user->tmt_awal);
+                $now = Carbon::now();
+                $years = $start->diffInYears($now);
+                $months = $start->copy()->addYears($years)->diffInMonths($now);
+                $masaKerja = "{$years} Tahun {$months} Bulan";
+            }
+
+            $dataForView = [
+                'data' => $kontrak_perpanjangan,
+                'user' => $user,
+                'ttl' => $ttl,
+                'tmt_awal' => $tmt_awal,
+                'masa_kerja' => $masaKerja,
+            ];
+
+            $html = view('pdf.spk-koper-2025.rinder', $dataForView)->render();
+
+            $filename = $user->nip . '_SPK.pdf';
+
+            // INI CARA BENAR UNTUK PREVIEW
+            return $pdf->generate($html, $filename, 'I');
+        }
+        return abort(404);
+    }
+
 
     private function getTmtKontrak(User $user): array
     {

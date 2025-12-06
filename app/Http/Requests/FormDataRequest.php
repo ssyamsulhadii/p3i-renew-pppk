@@ -21,7 +21,7 @@ class FormDataRequest extends FormRequest
     {
         $this->merge([
             'user_id' => Auth::id(),
-            'status' => 'Dokumen Verifikasi.',
+            'status' => 'Dokumen Verifikasi',
             'is_done' => false,
         ]);
     }

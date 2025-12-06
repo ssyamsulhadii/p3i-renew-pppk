@@ -6,9 +6,11 @@ use App\Models\KontrakPerpanjangan;
 use App\Models\MasaPerpanjangan;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\SimpleExcel\SimpleExcelWriter;
 
 class DetailUsulanController extends Controller
 {
+
     public function index()
     {
         // Paginate data masa perpanjangan
@@ -107,8 +109,11 @@ class DetailUsulanController extends Controller
             });
         }
 
-        $list_pegawai = $query->paginate(10);
+        if ($request['export']) {
+            return $query->get();
+        }
 
+        $list_pegawai = $query->paginate(10);
         return view('pages.detail-usulan.show', compact(
             'list_pegawai',
             'angkatan',
@@ -122,5 +127,33 @@ class DetailUsulanController extends Controller
             $query->where('kode_angkatan', $angkatan);
         })->update(['is_done' => true]);
         return back()->with('alert-success', 'Data final berhasil dipush, silakan Download dan Unggah SPK.');
+    }
+
+    public function exportExcel(Request $request, $angkatan, $type)
+    {
+        $request['export'] = true;
+        $list_pegawai = $this->show($request, $angkatan, $type);
+
+        // Nama file export
+        $filename = 'data_pegawai_' . $angkatan . '_' . $type . '.xlsx';
+        $path = storage_path('app/' . $filename);
+
+        // Buat writer excel
+        $writer = SimpleExcelWriter::create($path)
+            ->addHeader(['No', 'NIP', 'Nama', 'Jabatan', 'Unit Kerja']);
+
+        // Isi data
+        $no = 1;
+        foreach ($list_pegawai as $p) {
+            $writer->addRow([
+                $no++,
+                $p->nip ?? '-',
+                $p->nama ?? '-',
+                $p->jabatan ?? '-',
+                $p->unit_kerja ?? '-',
+            ]);
+        }
+        $writer->close();
+        return response()->download($path, $filename)->deleteFileAfterSend(true);
     }
 }

@@ -24,6 +24,12 @@
                         <div class="col-md-2">
                             <button class="btn btn-primary w-100">Cari</button>
                         </div>
+                        <div class="col-md-1">
+                            <a href="{{ route('detail-usulan.export.excel', ['angkatan' => $angkatan, 'type' => $type]) }}"
+                                class="btn btn-success">
+                                Export Excel
+                            </a>
+                        </div>
                     </div>
                 </form>
                 <table class="table table-vcenter table-bordered table-nowrap mt-3">

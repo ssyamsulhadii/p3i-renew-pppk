@@ -81,9 +81,9 @@
                         @if ($kontrak_saya->is_edit)
                             <div class="mb-3">
                                 <label class="form-label">Surat Perjanjian Kerja (SPK)</label>
-                                <a href="" target="_blank"
-                                    class="form-control d-block py-2 px-3 border bg-secondary-lt">
-                                    <span class="btn btn-sm btn-success">Download SPK</span>
+                                <a href="{{ route('usul-perpanjangan.cetak-spk', ['kontrak_perpanjangan' => $kontrak_saya->id]) }}"
+                                    target="_blank" class="form-control d-block py-2 px-3 border bg-secondary-lt">
+                                    <span class="btn btn-sm btn-success">Cetak SPK</span>
                                 </a>
                             </div>
                         @else
