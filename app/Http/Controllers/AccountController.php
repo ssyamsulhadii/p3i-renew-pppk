@@ -55,9 +55,9 @@ class AccountController extends Controller
     public function updateDataInformasi(Request $request, User $user)
     {
         $request->validate([
-            'sk' => ['required', 'file', 'mimes:pdf', 'max:1000'],
-            'spk' => ['required', 'file', 'mimes:pdf', 'max:1000'],
-            'spp' => ['required', 'file', 'mimes:pdf', 'max:1000'],
+            'sk' => ['required', 'file', 'mimes:pdf', 'max:1500'],
+            'spk' => ['required', 'file', 'mimes:pdf', 'max:1500'],
+            'spp' => ['required', 'file', 'mimes:pdf', 'max:1500'],
         ]);
 
         // upload menggunakan fungsi helper

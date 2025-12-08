@@ -32,11 +32,11 @@ class FormDataRequest extends FormRequest
         $isUpdate = in_array($this->method(), ['PUT', 'PATCH']);
         return [
             'masa_perpanjangan_id' => 'nullable',
-            'surat_pengantar' => [$isUpdate ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:1200'],
-            'surat_sehat' => [$isUpdate ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:1200'],
-            'sptjm' => [$isUpdate ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:1200'],
-            'skp' => [$isUpdate ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:1200'],
-            'rekap_absensi' => [$isUpdate ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:1200'],
+            'surat_pengantar' => [$isUpdate ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:1500'],
+            'surat_sehat' => [$isUpdate ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:1500'],
+            'sptjm' => [$isUpdate ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:1500'],
+            'skp' => [$isUpdate ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:1500'],
+            'rekap_absensi' => [$isUpdate ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:1500'],
             'status' => 'nullable',
             'is_done' => 'nullable',
             'user_id' => 'nullable',
