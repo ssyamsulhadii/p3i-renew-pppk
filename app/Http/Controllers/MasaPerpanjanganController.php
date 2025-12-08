@@ -24,7 +24,7 @@ class MasaPerpanjanganController extends Controller
      */
     public function create()
     {
-        $list_kode_angkatan = User::where('level', 'member')->groupBy('kode_angkatan')->get()->pluck('kode_angkatan');
+        $list_kode_angkatan = User::where('level', 'member')->select('kode_angkatan')->groupBy('kode_angkatan')->pluck('kode_angkatan');
         return view('pages.masa-perpanjangan.create', compact('list_kode_angkatan'));
     }
 
