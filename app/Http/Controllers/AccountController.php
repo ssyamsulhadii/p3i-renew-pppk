@@ -55,15 +55,15 @@ class AccountController extends Controller
     public function updateDataInformasi(Request $request, User $user)
     {
         $request->validate([
-            'sk' => ['required', 'file', 'mimes:pdf', 'max:1200'],
-            'spk' => ['required', 'file', 'mimes:pdf', 'max:1200'],
-            'spp' => ['required', 'file', 'mimes:pdf', 'max:1200'],
+            'sk' => ['required', 'file', 'mimes:pdf', 'max:1000'],
+            'spk' => ['required', 'file', 'mimes:pdf', 'max:1000'],
+            'spp' => ['required', 'file', 'mimes:pdf', 'max:1000'],
         ]);
 
         // upload menggunakan fungsi helper
         $user->sk  = $this->uploadFile($request, $user, 'sk',  'DATA-PROFIL/sk');
         $user->spk = $this->uploadFile($request, $user, 'spk', 'DATA-PROFIL/spk');
-        $user->spk = $this->uploadFile($request, $user, 'spp', 'DATA-PROFIL/spp');
+        $user->spp = $this->uploadFile($request, $user, 'spp', 'DATA-PROFIL/spp');
         $user->is_done = true;
         $user->save();
 
