@@ -17,7 +17,7 @@
 <x-pdf.title-pasal num="5" text="Gaji dan Tunjangan"></x-pdf.title-pasal>
 <table>
     <x-pdf.tr num="1"
-        text="<strong>Pihak Kedua</strong> berhak mendapatkan gaji dan tunjangan sesuai dengan ketentuan peraturan perundangundangan."></x-pdf.tr>
+        text="<strong>Pihak Kedua</strong> berhak mendapatkan gaji dan tunjangan sesuai dengan ketentuan peraturan perundang-undangan."></x-pdf.tr>
     <x-pdf.tr num="2" text="<strong>Pihak Kedua</strong> berhak menerima gaji dan tunjangan."></x-pdf.tr>
     <x-pdf.tr num="3"
         text="Besaran gaji dan tunjangan sebagaimana dimaksud pada ayat (2) dan (3) sesuai dengan ketentuan
@@ -60,9 +60,9 @@
 </x-pdf.ul>
 <table>
     <x-pdf.tr num="2"
-        text="Pemberian penghargaan kepada Pihak Kedua sebagaimana dimaksud pada ayat (1) huruf a dilaksanakan sesuai dengan ketentuan peraturan perundang-undangan.">
+        text="Pemberian penghargaan kepada <strong>Pihak Kedua</strong> sebagaimana dimaksud pada ayat (1) huruf a dilaksanakan sesuai dengan ketentuan peraturan perundang-undangan.">
     </x-pdf.tr>
     <x-pdf.tr num="3"
-        text="Pemberian penghargaan kepada Pihak Kedua sebagaimana dimaksud pada ayat (1) huruf b diberikan kepada Pihak Kedua apabila mempunyai penilaian kinerja yang paling baik.">
+        text="Pemberian penghargaan kepada <strong>Pihak Kedua</strong> sebagaimana dimaksud pada ayat (1) huruf b diberikan kepada <strong>Pihak Kedua</strong> apabila mempunyai penilaian kinerja yang paling baik.">
     </x-pdf.tr>
 </table>

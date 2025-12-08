@@ -120,10 +120,9 @@ class DataPegawaiController extends Controller
         // --- 5. Load CSV melalui League/CSV
         $csv = Reader::createFromPath($tempPath, 'r');
         // SET DELIMITER TAB!
-        $csv->setDelimiter(";");
+        $csv->setDelimiter(",");
         // File kamu punya header
         $csv->setHeaderOffset(0);
-
         foreach ($csv as $row) {
             foreach ($csv as $row) {
                 User::updateOrCreate(
@@ -140,6 +139,7 @@ class DataPegawaiController extends Controller
                         'tmt_awal'       => $row['tmt_awal'],
                         'tmt_akhir'      => $row['tmt_akhir'],
                         'bup'            => $row['bup'],
+                        'golongan'            => $row['golongan'],
                         'password'       => bcrypt($row['nip']),
                     ]
                 );

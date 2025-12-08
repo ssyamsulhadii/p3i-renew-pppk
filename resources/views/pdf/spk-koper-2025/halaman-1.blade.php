@@ -88,7 +88,7 @@
     </tr>
     <tr>
         <td class="label">Masa kerja sebelumnya</td>
-        <td>: 0 Bulan 5 Tahun</td>
+        <td>: 0 Bulan {{ $user->mks }} Tahun</td>
     </tr>
     <tr>
         <td class="label">Unit Kerja</td>

@@ -125,7 +125,11 @@ class DetailUsulanController extends Controller
     {
         KontrakPerpanjangan::whereHas('user', function ($query) use ($angkatan) {
             $query->where('kode_angkatan', $angkatan);
-        })->update(['is_done' => true]);
+        })->update([
+            'is_done' => true,
+            'status' => 'Dokumen Diterima',
+            'catatan' => null,
+        ]);
         return back()->with('alert-success', 'Data final berhasil dipush, silakan Download dan Unggah SPK.');
     }
 

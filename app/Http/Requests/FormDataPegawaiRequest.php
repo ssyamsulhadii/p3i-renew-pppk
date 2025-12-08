@@ -41,6 +41,7 @@ class FormDataPegawaiRequest extends FormRequest
             'unit_kerja' => 'required|string',
             'jenis_formasi' => 'required|string|in:PPPK TEKNIS,PPPK KESEHATAN,PPPK GURU',
             'jabatan' => 'required|string',
+            'golongan' => 'required|string',
             'kode_angkatan' => 'required|string',
             'tmt_awal' => 'required|string',
             'tmt_akhir' => 'required|string',

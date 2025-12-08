@@ -51,12 +51,18 @@ class DataUsulanController extends Controller
     public function isDone(KontrakPerpanjangan $data_usulan)
     {
         $data_usulan->update(['is_done' => $data_usulan->is_done ? false : true]);
-        return back()->with('alert-success', 'Data final berhasil diperbarui.');
+        $teks = 'Data final berhasil diperbarui menjadi ' . ($data_usulan->is_done ? 'Lengkap' : 'Kurang') . '.';
+        return back()->with('alert-success', $teks);
     }
     public function isEdit(KontrakPerpanjangan $data_usulan)
     {
         $data_usulan->update(['is_edit' => $data_usulan->is_edit ? false : true]);
         return back()->with('alert-success', 'Data final berhasil diperbarui.');
+    }
+    public function updateStatus(Request $request,  KontrakPerpanjangan $data_usulan)
+    {
+        $data_usulan->update(['status' => $request->status]);
+        return back()->with('alert-success', "Data status berhasil diperbarui menjadi $request->status.");
     }
 
     public function exportExcel($masa_perpanjangan, $status)

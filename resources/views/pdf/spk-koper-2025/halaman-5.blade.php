@@ -44,7 +44,7 @@
     <li><strong>Pihak Kedua</strong> mengajukan permohonan berhenti sebagai Pegawai Pemerintah dengan Perjanjian
         Kerja; atau</li>
     <li>Terjadi perampingan organisasi atau kebijakan pemerintah yang mengakibatkan pengurangan
-        Pegawai Pemerintah dengan Perjanjian Kerja pada Pihak Kesatu.</li>
+        Pegawai Pemerintah dengan Perjanjian Kerja pada <strong>Pihak Kesatu</strong>.</li>
 </x-pdf.ul>
 <table>
     <x-pdf.tr num="2" setpad="15"

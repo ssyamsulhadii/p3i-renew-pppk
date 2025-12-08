@@ -23,6 +23,7 @@
         <x-forms.input name="unit_kerja" label="Unit Kerja"
             item="{{ $data_pegawai->unit_kerja ?? '' }}"></x-forms.input>
         <x-forms.input name="jabatan" label="Jabatan" item="{{ $data_pegawai->jabatan ?? '' }}"></x-forms.input>
+        <x-forms.input name="golongan" label="Golongan" item="{{ $data_pegawai->golongan ?? '' }}"></x-forms.input>
         <x-forms.input name="bup" label="Batas Usia Pensiun (BUP)" item="{{ $data_pegawai->bup ?? '' }}"
             type="number"></x-forms.input>
         @isset($data_pegawai)

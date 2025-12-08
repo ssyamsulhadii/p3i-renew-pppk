@@ -38,11 +38,11 @@ class UsulPerpanjanganController extends Controller
 
     public function store(FormDataRequest $request)
     {
+        $dataKontrak = $this->getTmtKontrak(Auth::user());
         $validated = $request->validated();
         $masa_perpanjangan = MasaPerpanjangan::find($request->masa_perpanjangan_id);
         // Proses upload file & update field
         $validated = $this->handleFileUploads($request, $validated, $masa_perpanjangan);
-        $dataKontrak = $this->getTmtKontrak(Auth::user());
         $validated['tmt_awal']  = $dataKontrak['tmt_awal'];
         $validated['tmt_akhir'] = $dataKontrak['tmt_akhir'];
         KontrakPerpanjangan::create($validated);
@@ -63,6 +63,11 @@ class UsulPerpanjanganController extends Controller
 
     public function finalUsul(Request $request, KontrakPerpanjangan $kontrak_perpanjangan)
     {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $user->update([
+            'mks' => 5 + max(0, (count($user->kontrakPerpanjangan) - 1) * 5)
+        ]);
         $validated = $request->validate(['spk_final' => 'required|mimes:pdf|max:1200']);
         $validated = $this->handleFileUploads($request, $validated, $kontrak_perpanjangan->masaPerpanjangan);
         $validated['is_done'] = true;
@@ -113,17 +118,14 @@ class UsulPerpanjanganController extends Controller
         $latest = KontrakPerpanjangan::where('user_id', $user->id)
             ->latest()
             ->first();
-
         // Batas akhir kerja (tanggal lahir + BUP)
         $tanggalAkhirKerja = $user->tanggal_lahir
             ->copy()
             ->addYears($user->bup);
-
         // Tentukan TMT awal
         $tmtAwal = ($latest?->tmt_akhir ?? $user->tmt_akhir)
             ->copy()
             ->addDay();
-
         // Hitung TMT akhir 5 tahun
         $tmtAkhirCalon = $tmtAwal->copy()->addYears(5)->subDay();
 

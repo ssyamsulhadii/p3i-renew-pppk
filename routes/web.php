@@ -62,6 +62,7 @@ Route::middleware(['auth', 'redirect.unauthorize:admin'])->group(function () {
     Route::post('/users/import-csv', [DataPegawaiController::class, 'importCsv'])->name('users.import.csv');
 
     Route::resource('/data-usulan', DataUsulanController::class)->except(['create', 'store', 'show']);
+    Route::post('/data-usulan/{data_usulan}/update-status', [DataUsulanController::class, 'updateStatus'])->name('data-usulan.updateStatus');
     Route::get('/data-usulan/{data_usulan}/is-done', [DataUsulanController::class, 'isDone'])->name('data-usulan.isDone');
     Route::get('/data-usulan/{data_usulan}/is-edit', [DataUsulanController::class, 'isEdit'])->name('data-usulan.isEdit');
     Route::get('/data-usulan/{masa_pepranjangan}/{status}/export-excel', [DataUsulanController::class, 'exportExcel'])->name('data-usulan.export.excel');

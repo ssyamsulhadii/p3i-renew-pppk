@@ -70,7 +70,7 @@
                         <th>Jabatan</th>
                         <th>Unit Kerja</th>
                         <th>Jenis Formasi</th>
-                        <th>Kode Angkatan</th>
+                        <th class="text-center">Masa Kerja</th>
                         <th>Status</th>
                         <th class="text-center">Action</th>
                     </tr>
@@ -93,7 +93,8 @@
                             </td>
                             <td>{{ $data_pegawai->jenis_formasi }}</td>
                             <td class="text-center">
-                                <span class="badge bg-teal text-teal-fg"> {{ $data_pegawai->kode_angkatan }}</span>
+                                {{ $data_pegawai->tmt_awal->isoFormat('DD MMMM YYYY') }} s/d <br>
+                                {{ $data_pegawai->tmt_akhir->isoFormat('DD MMMM YYYY') }}
                             </td>
                             <td>
                                 <a href="{{ route('data-pegawai.status', ['data_pegawai' => $data_pegawai->id]) }}">

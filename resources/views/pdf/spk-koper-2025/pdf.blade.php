@@ -59,7 +59,7 @@
     </htmlpageheader>
     <!-- FOOTER UNTUK SEMUA HALAMAN -->
     <htmlpagefooter name="tteFooter" style="display:none">
-        <div style="text-align: center; font-size: 9pt; color: #555;">
+        <div style="text-align: center; font-size: 9pt; color: #000000;">
             <i>Dokumen ini telah ditandatangani secara elektronik menggunakan sertifikat elektronik
                 yang diterbitkan oleh Balai Besar Sertifikasi Elektronik (BSrE),
                 Badan Siber dan Sandi Negara (BSSN).</i>

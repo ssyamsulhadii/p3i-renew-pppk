@@ -3,8 +3,8 @@
 @section('content')
     <div class="container mt-4">
         {{-- Notifikasi sukses --}}
-        @if (session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
+        @if (session('alert-success'))
+            <div class="alert alert-success">{{ session('alert-success') }}</div>
         @endif
 
         {{-- Filter Masa & NIP --}}
@@ -39,7 +39,7 @@
                         </div>
                         <div class="col-md-4">
                             <button type="submit" class="btn btn-primary">Tampilkan</button>
-                            @if ($list_data->count() > 0)
+                            @if ($list_data->count() > 0 && request()->filled('masa_perpanjangan_id') && request()->filled('status'))
                                 <a href="{{ route('data-usulan.export.excel', ['masa_pepranjangan' => request('masa_perpanjangan_id'), 'status' => request('status')]) }}"
                                     class="btn btn-success">Export Excel</a>
                             @endif
@@ -81,7 +81,21 @@
                                         </a>
                                     </td>
                                     <td>{{ $item->catatan ?? '-' }}</td>
-                                    <td>{{ $item->status ?? '-' }}</td>
+                                    <td>
+                                        <form
+                                            action="{{ route('data-usulan.updateStatus', ['data_usulan' => $item->id]) }}"
+                                            method="POST">
+                                            @csrf
+                                            <select class="form-select" name="status" onchange="this.form.submit()">
+                                                <option @selected($item->status == 'Dokumen Perbaikan') value="Dokumen Perbaikan">Dokumen
+                                                    Perbaikan</option>
+                                                <option @selected($item->status == 'Dokumen Verifikasi') value="Dokumen Verifikasi">Dokumen
+                                                    Verifikasi</option>
+                                                <option @selected($item->status == 'Dokumen Diterima') value="Dokumen Diterima">Dokumen
+                                                    Diterima</option>
+                                            </select>
+                                        </form>
+                                    </td>
                                     <td class="text-center">
                                         <a href="{{ route('data-usulan.isDone', ['data_usulan' => $item->id]) }}"
                                             class="text-decoration-none">

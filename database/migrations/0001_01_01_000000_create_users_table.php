@@ -28,8 +28,11 @@ return new class extends Migration
             $table->year('bup')->nullable();
             $table->string('sk')->nullable();
             $table->string('spk')->nullable();
+            $table->string('spp')->nullable();
             $table->boolean('is_done')->default(false);
             $table->enum('level', ['admin', 'member'])->default('member');
+            $table->char('golongan')->nullable();
+            $table->tinyInteger('mks')->default(5);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

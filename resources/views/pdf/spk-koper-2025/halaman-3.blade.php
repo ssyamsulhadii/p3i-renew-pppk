@@ -1,20 +1,20 @@
 <x-pdf.ul start="13">
     <table style="width: 610px">
-        <x-pdf.tr setpad="5px" num="1" text="ikut serta sebagai pelaksana kampanye;"></x-pdf.tr>
+        <x-pdf.tr setpad="5px" num="1" text="Ikut serta sebagai pelaksana kampanye;"></x-pdf.tr>
         <x-pdf.tr setpad="5px" num="2"
-            text="menjadi peserta kampanye degan menggunakan atribut partai atau atribut
+            text="Menjadi peserta kampanye degan menggunakan atribut partai atau atribut
                 Aparatur Sipil Negara;"></x-pdf.tr>
         <x-pdf.tr setpad="5px" num="3"
-            text="sebagai peserta kampanye dengan mengerahkan Aparatur Sipil Negara lain; dan/atau;"></x-pdf.tr>
+            text="Sebagai peserta kampanye dengan mengerahkan Aparatur Sipil Negara lain; dan/atau"></x-pdf.tr>
         <x-pdf.tr setpad="5px" num="4"
-            text="sebagai peserta kampanye dengan menggunakan fasilitas Negara."></x-pdf.tr>
+            text="Sebagai peserta kampanye dengan menggunakan fasilitas Negara."></x-pdf.tr>
     </table>
     <li>Memberikan dukungan kepada calon Presiden / Wakil Presiden dengan cara :</li>
     <table style="width: 610px">
         <x-pdf.tr setpad="5px" num="1"
-            text="membuat keputusan dan / atau tindakan yang menguntungkan atau merugikan salah satu pasangan calon selama masa kampanye; dan / atau"></x-pdf.tr>
+            text="Membuat keputusan dan / atau tindakan yang menguntungkan atau merugikan salah satu pasangan calon selama masa kampanye; dan / atau"></x-pdf.tr>
         <x-pdf.tr setpad="5px" num="2"
-            text="mengadakan kegiatan yang mengarah kepada keberpihakan terhadap pasangan calon yang menjadi peserta pemilu sebelum, selama, dan / atau sesudah masa kampanye meliputi pertemuan, ajakan, himbauan, seruan, atau pemberian barang kepada Aparatur Sipil Negara dalam lingkungan unit kerjanya, anggota keluarga, dan masyarakat."></x-pdf.tr>
+            text="Mengadakan kegiatan yang mengarah kepada keberpihakan terhadap pasangan calon yang menjadi peserta pemilu sebelum, selama, dan / atau sesudah masa kampanye meliputi pertemuan, ajakan, himbauan, seruan, atau pemberian barang kepada Aparatur Sipil Negara dalam lingkungan unit kerjanya, anggota keluarga, dan masyarakat."></x-pdf.tr>
     </table>
     <li>Memberikan dukungan kepada calon anggota Dewan Perwakilan Daerah atau Calon Kepala Daerah / Wakil Kepala
         Daerah
@@ -70,7 +70,7 @@
         <x-pdf.tr setpad="5px" num="1"
             text="Pemberhentian hubungan Kerja sementara apabila menjadi tersangka dan ditahan karena melakukan tindak pidana/tersangkut kasus hukum akan dilakukan;"></x-pdf.tr>
         <x-pdf.tr setpad="5px" num="2"
-            text="Apabila dinyatakan bersalah dan telah mempunyai kekuatan hukum tetap, maka Pihak Pertama menjatuhkan sanksi Pemutusan Hubungan Kerja terhitung sejak tanggal putusan pengadilan mempunyai kekuatan hukum tetap;"></x-pdf.tr>
+            text="Apabila dinyatakan bersalah dan telah mempunyai kekuatan hukum tetap, maka <strong>Pihak Pertama</strong> menjatuhkan sanksi Pemutusan Hubungan Kerja terhitung sejak tanggal putusan pengadilan mempunyai kekuatan hukum tetap;"></x-pdf.tr>
         <x-pdf.tr setpad="5px" num="3"
             text="Apabila dinyatakan tidak bersalah / tidak cukup bukti / bebas baik dalam tingkat penyidikan, penuntutan atau putusan pengadilan yang mempunyai kekuatan hukum tetap, maka apabila masa perjanjian kerja masih berlaku <strong>Pihak Kedua</strong> dipekerjakan kembali;"></x-pdf.tr>
         <x-pdf.tr setpad="5px" num="4" text="Penundaaan Kenaikan Gaji."></x-pdf.tr>
