@@ -23,6 +23,7 @@ class User extends Authenticatable
         'tanggal_lahir' => 'date',
         'tmt_awal' => 'date',
         'tmt_akhir' => 'date',
+        'bup' => 'integer',
     ];
     /**
      * The attributes that should be hidden for serialization.

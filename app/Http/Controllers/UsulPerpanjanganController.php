@@ -38,11 +38,11 @@ class UsulPerpanjanganController extends Controller
 
     public function store(FormDataRequest $request)
     {
-        $dataKontrak = $this->getTmtKontrak(Auth::user());
         $validated = $request->validated();
         $masa_perpanjangan = MasaPerpanjangan::find($request->masa_perpanjangan_id);
         // Proses upload file & update field
         $validated = $this->handleFileUploads($request, $validated, $masa_perpanjangan);
+        $dataKontrak = $this->getTmtKontrak(Auth::user());
         $validated['tmt_awal']  = $dataKontrak['tmt_awal'];
         $validated['tmt_akhir'] = $dataKontrak['tmt_akhir'];
         KontrakPerpanjangan::create($validated);
