@@ -6,7 +6,6 @@ use App\Http\Requests\FormMasaPerpanjanganRequest;
 use App\Models\MasaPerpanjangan;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class MasaPerpanjanganController extends Controller
 {
@@ -44,7 +43,7 @@ class MasaPerpanjanganController extends Controller
      */
     public function edit(MasaPerpanjangan $masa_perpanjangan)
     {
-        $list_kode_angkatan = User::where('level', 'member')->groupBy('kode_angkatan')->get()->pluck('kode_angkatan');
+        $list_kode_angkatan = User::where('level', 'member')->select('kode_angkatan')->groupBy('kode_angkatan')->pluck('kode_angkatan');
         return view('pages.masa-perpanjangan.edit', compact('masa_perpanjangan', 'list_kode_angkatan'));
     }
 
