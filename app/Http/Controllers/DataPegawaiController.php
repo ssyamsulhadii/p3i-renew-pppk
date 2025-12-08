@@ -14,7 +14,7 @@ class DataPegawaiController extends Controller
      */
     public function index(Request $request)
     {
-        $list_kode_angkatan = User::where('level', 'member')->groupBy('kode_angkatan')->get()->pluck('kode_angkatan');
+        $list_kode_angkatan = User::where('level', 'member')->select('kode_angkatan')->groupBy('kode_angkatan')->pluck('kode_angkatan');
         $query = User::where('level', 'member');
         // Filter berdasarkan kode angkatan
         if ($request->filled('kode_angkatan')) {
