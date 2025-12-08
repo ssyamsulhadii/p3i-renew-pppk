@@ -49,8 +49,12 @@
                             <tr>
                                 <td>{{ $list_pegawai->firstItem() + $index }}</td>
                                 <td>{{ $item->nama }} <br> NIP.{{ $item->nip }} </td>
-                                <td>{{ $item->jabatan }}</td>
-                                <td>{{ $item->unit_kerja }}</td>
+                                <td>
+                                    <div class="text-wrap" style="width: 150px">{{ $item->jabatan }}</div>
+                                </td>
+                                <td>
+                                    <div class="text-wrap" style="width: 150px">{{ $item->unit_kerja }}</div>
+                                </td>
                                 <td>{{ $item->jenis_formasi }}</td>
                                 <td>{{ $item->kode_angkatan }}</td>
                             </tr>
