@@ -78,7 +78,7 @@ class UsulPerpanjanganController extends Controller
 
     public function cetakSpk(KontrakPerpanjangan $kontrak_perpanjangan, ServicePdf $pdf)
     {
-        if (Auth::id() === $kontrak_perpanjangan->user_id) {
+        if (Auth::id() == $kontrak_perpanjangan->user_id) {
             $user = $kontrak_perpanjangan->user;
 
             $ttl = $user->tempat_lahir . ', ' . $user->tanggal_lahir->isoFormat('DD MMMM YYYY');
