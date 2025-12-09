@@ -1,3 +1,10 @@
+<br>
+<table>
+    <x-pdf.tr num="4"
+        text="Pemberian penghargaan kepada <strong>Pihak Kedua</strong> sebagaimana dimaksud pada ayat (1) huruf c diberikan kepada <strong>Pihak Kedua</strong> setelah mendapatkan pertimbangan dari Tim Penilai Kinerja Pegawai Pemerintah dengan Perjanjian Kerja yang ada pada <strong>Pihak Kesatu</strong>.">
+    </x-pdf.tr>
+</table>
+
 <x-pdf.title-pasal num="10" text="Perlindungan"></x-pdf.title-pasal>
 <table>
     <x-pdf.tr num="1" setpad="5"
@@ -8,7 +15,7 @@
     <li>Jaminan Hari Tua;</li>
     <li>Jaminan Kesehatan;</li>
     <li>Jaminan Kecelakaan Kerja;</li>
-    <li>Jaminan Kecelakaan Kerja;</li>
+    <li>Jaminan Kematian;</li>
     <li>Bantuan Hukum.</li>
 </x-pdf.ul>
 <table>
@@ -27,7 +34,7 @@
 </table>
 
 <x-pdf.title-pasal num="11" text="Pemutusan Hubungan Kerja"></x-pdf.title-pasal>
-<p class="text-justify">
+<p class="text-justify" style="margin-bottom: 0px">
     <strong>Pihak Kesatu</strong> dan <strong><strong>Pihak Kedua</strong></strong> melakukan pemutusan hubungan
     perjanjian kerja dengan
     ketentuan sebagai berikut :
