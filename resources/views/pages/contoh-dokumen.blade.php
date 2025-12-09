@@ -37,6 +37,16 @@
                                     </a>
                                 </td>
                             </tr>
+                            <tr>
+                                <th>3</th>
+                                <td>Blank Dokumen</td>
+                                <td class="text-center">
+                                    <a href="{{ asset('assets/dokumen/blank-dokumen.pdf') }}" target="_blank"
+                                        class="form-control d-block py-2 px-3 border bg-secondary-lt">
+                                        <span class="btn btn-sm btn-warning">Download File</span>
+                                    </a>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
