@@ -43,7 +43,7 @@
 
                 <div role="alert" class="alert alert-danger"><b>Perhatian</b> :
                     <ol>
-                        <li>Dokumen yang diuungah Surat Pengantar Pimpinan, Surat Keterangan Sehat, Surat Pernyataan
+                        <li>Dokumen yang diunggah Surat Pengantar Pimpinan, Surat Keterangan Sehat, Surat Pernyataan
                             Pertanggung Jawab Mutlak, Sasaran Kinerja Pegawai, Rekap Absensi.</li>
                         <li>
                             Semua file harus berformat PDF dengan ukuran maksimal 1.000 kb / 1 MB.
