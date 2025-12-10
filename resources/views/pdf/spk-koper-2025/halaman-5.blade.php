@@ -15,7 +15,7 @@
     <li>Jaminan Hari Tua;</li>
     <li>Jaminan Kesehatan;</li>
     <li>Jaminan Kecelakaan Kerja;</li>
-    <li>Jaminan Kematian;</li>
+    <li>Jaminan Kematian; dan</li>
     <li>Bantuan Hukum.</li>
 </x-pdf.ul>
 <table>

@@ -14,7 +14,7 @@
     </table>
 </x-pdf.ul>
 
-<x-pdf.title-pasal num="5" text="Gaji dan Tunjangan"></x-pdf.title-pasal>
+<x-pdf.title-pasal num="6" text="Gaji dan Tunjangan"></x-pdf.title-pasal>
 <table>
     <x-pdf.tr num="1"
         text="<strong>Pihak Kedua</strong> berhak mendapatkan gaji dan tunjangan sesuai dengan ketentuan peraturan perundang-undangan."></x-pdf.tr>
