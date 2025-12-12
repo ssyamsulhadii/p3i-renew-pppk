@@ -60,9 +60,9 @@
             <div class="card">
                 <div class="card-body">
                     <span class="badge text-white bg-dark fs-4 mb-3 py-2">Upload SPK :
-                        {{ $total_is_edit_true }}</span>
-                    <span class="badge text-white bg-warning fs-4 mb-3 py-2">Proses Upload :
                         {{ $total_is_edit_false }}</span>
+                    <span class="badge text-white bg-warning fs-4 mb-3 py-2">Proses Upload :
+                        {{ $total_is_edit_true }}</span>
                     <table class="table table-bordered table-striped">
                         <thead class="table-light">
                             <tr>
