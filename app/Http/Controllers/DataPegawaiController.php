@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\FormDataPegawaiRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use League\Csv\Reader;
 
 class DataPegawaiController extends Controller
@@ -125,19 +126,22 @@ class DataPegawaiController extends Controller
         $csv->setHeaderOffset(0);
         foreach ($csv as $row) {
             foreach ($csv as $row) {
+                $tanggal_lahir = Carbon::createFromFormat('Ymd', \Illuminate\Support\Str::substr($row['nip'], 0, 8))->toDateString();
+                $tmt_awal  = Carbon::createFromFormat('Ymd', $row['tmt_awal']);
+                $tmt_akhir = $tmt_awal->copy()->addYears(5)->subDay()->toDateString();
                 User::updateOrCreate(
                     ['username' => $row['nip']],
                     [
                         'nama'           => $row['nama'],
                         'tempat_lahir'   => $row['tempat_lahir'],
-                        'tanggal_lahir'  => $row['tanggal_lahir'],
+                        'tanggal_lahir'  => $tanggal_lahir,
                         'pendidikan'     => $row['pendidikan'],
                         'jabatan'        => $row['jabatan'],
                         'unit_kerja'     => $row['unit_kerja'],
                         'jenis_formasi'  => $row['jenis_formasi'],
                         'kode_angkatan'  => $row['kode_angkatan'],
-                        'tmt_awal'       => $row['tmt_awal'],
-                        'tmt_akhir'      => $row['tmt_akhir'],
+                        'tmt_awal'       => $tmt_awal->toDateString(),
+                        'tmt_akhir'      => $tmt_akhir,
                         'bup'            => $row['bup'],
                         'golongan'            => $row['golongan'],
                         'password'       => bcrypt($row['nip']),

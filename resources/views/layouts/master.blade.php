@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>SIPERPEG-P3I-BKPSDM | KABUPATEN KAPUAS</title>
+    <title>SIPERPEG | P3I-BKPSDM Pemerintah Kabupaten Kapuas</title>
     <link rel="shortcut icon" href="{{ asset('assets/img/logo-siperpeg.png') }}">
     <!-- CSS files -->
     <link href="{{ asset('assets/css/tabler.min.css?1692870487') }}" rel="stylesheet" />

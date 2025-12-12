@@ -9,9 +9,15 @@ class FormDataPegawaiRequest extends FormRequest
 
     public function prepareForValidation()
     {
+        $isUpdate = in_array($this->method(), ['PUT', 'PATCH']);
+        if ($isUpdate) {
+            $password = request('password') ? bcrypt(request('password')) : $this->data_pegawai->password;
+        } else {
+            $password = bcrypt(request('password'));
+        }
         $this->merge([
             'jenis_formasi' => strtoupper(request('jenis_formasi')),
-            'password' => bcrypt(request('password')),
+            'password' => $password,
         ]);
     }
     /**
