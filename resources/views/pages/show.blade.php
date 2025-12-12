@@ -7,6 +7,10 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-lg-6">
+                    <x-forms.input name="x1" label="Nama" phr="{{ $kontrak_saya->user->nama }}"
+                        disabled></x-forms.input>
+                    <x-forms.input name="x2" label="NIP" phr="{{ $kontrak_saya->user->nip }}"
+                        disabled></x-forms.input>
                     <x-forms.preview-file label="Surat Pengantar Pimpinan Kepala"
                         url="{{ $kontrak_saya->pathFile('surat_pengantar') }}">
                     </x-forms.preview-file>
@@ -17,6 +21,10 @@
                     </x-forms.preview-file>
                 </div>
                 <div class="col-lg-6">
+                    <x-forms.input name="x3" label="Unit Kerja" phr="{{ $kontrak_saya->user->unit_kerja }}"
+                        disabled></x-forms.input>
+                    <x-forms.input name="x4" label="Jabatan" phr="{{ $kontrak_saya->user->jabatan }}"
+                        disabled></x-forms.input>
                     <x-forms.preview-file label="Surat Keterangan Sehat" url="{{ $kontrak_saya->pathFile('surat_sehat') }}">
                     </x-forms.preview-file>
                     <x-forms.preview-file label="Surat Pernyataan Tanggung Jawab Mutlak"

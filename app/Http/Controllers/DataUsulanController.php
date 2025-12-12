@@ -16,10 +16,11 @@ class DataUsulanController extends Controller
 
         // Siapkan query kosong agar tidak error di blade
         $list_data = collect();
-
+        $total_is_edit_true = 0;
+        $total_is_edit_false = 0;
         // Jika user memilih masa_perpanjangan_id, baru tampilkan datanya
         if ($request->filled('masa_perpanjangan_id')) {
-            $list_data = KontrakPerpanjangan::where('masa_perpanjangan_id', $request->masa_perpanjangan_id)
+            $query = KontrakPerpanjangan::where('masa_perpanjangan_id', $request->masa_perpanjangan_id)
                 ->when($request->filled('status'), function ($query) use ($request) {
                     $query->where('status', $request->status);
                 })
@@ -29,10 +30,18 @@ class DataUsulanController extends Controller
                         $q->where('username', 'like', "%{$keyword}%")
                             ->orWhere('nama', 'like', "%{$keyword}%");
                     });
-                })->latest()->paginate(10)->withQueryString();
+                });
+
+            $list_data = $query->latest()
+                ->paginate(10)
+                ->withQueryString();
+
+            // total berdasarkan is_edit
+            $total_is_edit_true  = (clone $query)->where('is_edit', true)->count();
+            $total_is_edit_false = (clone $query)->where('is_edit', false)->count();
         }
 
-        return view('pages.data-usulan.index', compact('list_data', 'list_masa_perpanjangan'));
+        return view('pages.data-usulan.index', compact(['list_data', 'list_masa_perpanjangan', 'total_is_edit_true', 'total_is_edit_false']));
     }
 
 

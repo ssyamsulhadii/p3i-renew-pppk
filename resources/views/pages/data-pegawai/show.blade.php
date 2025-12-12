@@ -7,27 +7,32 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-lg-6">
-                    <x-forms.input name="x1" label="Nama" phr="{{ $user->nama }}" disabled></x-forms.input>
-                    <x-forms.input name="x2" label="NIP" phr="{{ $user->nip }}" disabled></x-forms.input>
-                    <x-forms.input name="x3" label="Unit Kerja" phr="{{ $user->unit_kerja }}" disabled></x-forms.input>
-                    <x-forms.input name="x4" label="Jabatan" phr="{{ $user->jabatan }}" disabled></x-forms.input>
-                    <x-forms.input name="x5" label="Golongan" phr="{{ $user->golongan }}" disabled></x-forms.input>
-                    <x-forms.input name="x6" label="Pendidikan" phr="{{ $user->pendidikan }}" disabled></x-forms.input>
+                    <x-forms.input name="x1" label="Nama" item="{{ $user->nama }}" disabled></x-forms.input>
+                    <x-forms.input name="x2" label="NIP" item="{{ $user->nip }}" disabled></x-forms.input>
+                    <x-forms.input name="x3" label="Unit Kerja" item="{{ $user->unit_kerja }}"
+                        disabled></x-forms.input>
+                    <x-forms.input name="x4" label="Jabatan" item="{{ $user->jabatan }}" disabled></x-forms.input>
+                    <x-forms.input name="x5" label="Golongan" item="{{ $user->golongan }}" disabled></x-forms.input>
+                    <x-forms.input name="x6" label="Pendidikan" item="{{ $user->pendidikan }}"
+                        disabled></x-forms.input>
                 </div>
                 <div class="col-lg-6">
                     <x-forms.input name="x7" label="Tempat Tanggal Lahir"
-                        phr="{{ $user->tempat_lahir . ', ' . $user->tanggal_lahir->isoFormat('DD-MM-YYYY') }}"
+                        item="{{ $user->tempat_lahir . ', ' . $user->tanggal_lahir->isoFormat('DD-MM-YYYY') }}"
                         disabled></x-forms.input>
-                    <x-forms.input name="x8" label="Batas Usia Pensiun (BUP)" phr="{{ $user->bup }} Tahun"
+                    <x-forms.input name="x12" label="Maksimal Masa Kerja"
+                        item="{{ $user->tanggal_lahir->addYears($user->bup)->isoFormat('DD-MM-YYYY') }}"
+                        disabled></x-forms.input>
+                    <x-forms.input name="x8" label="Batas Usia Pensiun (BUP)" item="{{ $user->bup }} Tahun"
                         disabled></x-forms.input>
                     <div class="row">
                         <div class="col-md-6">
                             <x-forms.input name="x9" label="TMT Kontrak"
-                                phr="{{ $user->tmt_awal->isoFormat('DD-MM-YYYY') }}" disabled></x-forms.input>
+                                item="{{ $user->tmt_awal->isoFormat('DD-MM-YYYY') }}" disabled></x-forms.input>
                         </div>
                         <div class="col-md-6">
                             <x-forms.input name="x10" label="TMT Selesai"
-                                phr="{{ $user->tmt_akhir->isoFormat('DD-MM-YYYY') }}" disabled></x-forms.input>
+                                item="{{ $user->tmt_akhir->isoFormat('DD-MM-YYYY') }}" disabled></x-forms.input>
                         </div>
                     </div>
 
