@@ -1,16 +1,15 @@
 <sethtmlpageheader name="logoHeader" value="on" show-this-page="1" />
 <h3 style="padding-top: 80px;">BUPATI KAPUAS</h3>
 <h4 style="margin-top: 14px; text-decoration: underline;">SURAT PERJANJIAN KERJA</h4>
-<div style="text-align: center">Nomor : 800/ 193 /P3I/BKPSDM/2025</div>
+<div style="text-align: center">Nomor : {{ $data->masaPerpanjangan->nomor_spk }}</div>
 <div class="text-justify">
-    Pada hari ini <b>Jumat</b> tanggal <b>Dua</b> bulan <b>Januari</b> tahun <b>Dua Ribu
-        Dua Puluh Enam</b>, yang bertanda tangan di bawah ini :
+    {!! $data->masaPerpanjangan->keterangan_waktu_spk !!}
 </div>
 <table>
     <tr>
         <td rowspan="4" style="width: 25px; vertical-align: top;">1.</td>
         <td>Nama</td>
-        <td>: <b>M. WIYATNO</b></td>
+        <td>: <strong>{{ $data->masaPerpanjangan->nama_pejabat }}</strong></td>
     </tr>
     <tr>
         <td class="label">Jabatan</td>

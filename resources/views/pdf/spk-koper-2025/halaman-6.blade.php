@@ -50,7 +50,7 @@ Peraturan perundang-undangan.">
             <img src="{{ public_path('DATA-MASPER/tte_kolektif/' . $data->masaPerpanjangan->tte_kolektif) }}"
                 style="width:110px;">
             <br><br>
-            <strong>M. WIYATNO</strong>
+            <strong>{{ $data->masaPerpanjangan->nama_pejabat }}</strong>
         </td>
     </tr>
 </table>

@@ -24,14 +24,17 @@ class FormMasaPerpanjanganRequest extends FormRequest
         $isUpdate = in_array($this->method(), ['PUT', 'PATCH']);
         $id = $this->masa_perpanjangan ? $this->masa_perpanjangan->id : '';
         return [
-            'kode_perpanjangan'   => 'required|string|unique:masa_perpanjangan,kode_perpanjangan,' . $id,
-            'judul'               => 'required|string|max:255',
-            'label_unggah_skp'    => 'required|string|max:255',
-            'label_unggah_absen'  => 'required|string|max:255',
-            'kode_angkatan'       => 'required|array',
-            'kode_angkatan.*'     => 'string',
-            'is_active'           => 'required|in:0,1',
-            'lampiran'            => $isUpdate ? 'nullable' : 'required' . '|file|mimes:pdf|max:2048',
+            'nomor_spk'            => 'required|string',
+            'keterangan_waktu_spk' => 'required|string',
+            'nama_pejabat'         => 'required|string',
+            'kode_perpanjangan'    => 'required|string|unique:masa_perpanjangan,kode_perpanjangan,' . $id,
+            'judul'                => 'required|string|max:255',
+            'label_unggah_skp'     => 'required|string|max:255',
+            'label_unggah_absen'   => 'required|string|max:255',
+            'kode_angkatan'        => 'required|array',
+            'kode_angkatan.*'      => 'string',
+            'is_active'            => 'required|in:0,1',
+            'lampiran'             => $isUpdate ? 'nullable' : 'required' . '|file|mimes:pdf|max:2048',
             'tte_kolekftif'        => 'nullable|file|mimes:jpg,jpeg,png|max:2048',
         ];
     }

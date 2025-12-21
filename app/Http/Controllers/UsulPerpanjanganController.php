@@ -23,10 +23,11 @@ class UsulPerpanjanganController extends Controller
                 return view('pages.usul-perpanjangan.not-page');
             } elseif (in_array($user_kode, $masa->kode_angkatan) && $masa->is_active) {
                 $kontrak_saya = KontrakPerpanjangan::where('user_id', Auth::id())->where('masa_perpanjangan_id', $masa->id)->first();
+                $is_relokasi = $this->callData();
                 if ($kontrak_saya) {
-                    return view('pages.usul-perpanjangan.edit', compact('kontrak_saya', 'masa'));
+                    return view('pages.usul-perpanjangan.edit', compact('kontrak_saya', 'masa', 'is_relokasi'));
                 }
-                return view('pages.usul-perpanjangan.create', compact('masa'));
+                return view('pages.usul-perpanjangan.create', compact('masa', 'is_relokasi'));
             }
             return abort(404);
         } else {
@@ -192,5 +193,14 @@ class UsulPerpanjanganController extends Controller
         }
 
         return $validated;
+    }
+
+    private function callData()
+    {
+        $opsional = [
+            ['id' => '0', 'nama' => 'Tidak'],
+            ['id' => '1', 'nama' => 'Ya'],
+        ];
+        return json_decode(json_encode($opsional));
     }
 }

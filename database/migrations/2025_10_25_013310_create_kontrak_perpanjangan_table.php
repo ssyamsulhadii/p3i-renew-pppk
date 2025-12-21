@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('sptjm');
             $table->string('skp');
             $table->string('rekap_absensi');
+            $table->boolean('is_relokasi')->default(false);
             $table->boolean('is_done')->default(false);
             $table->boolean('is_edit')->default(true);
             $table->string('spk_final')->nullable();

@@ -1,3 +1,10 @@
+<x-forms.input name="nama_pejabat" label="Nama Pejabat(huruf besar semua)" phr="Nama  Bupati"
+    item="{{ $masa_perpanjangan->nama_pejabat ?? '' }}"></x-forms.input>
+<x-forms.input name="nomor_spk" label="Nomor Surat SPK" item="{{ $masa_perpanjangan->nomor_spk ?? '' }}"
+    phr="800/ XXX /P3I/BKPSDM/20XX"></x-forms.input>
+<x-forms.textarea name="keterangan_waktu_spk" item="{{ $masa_perpanjangan->keterangan_waktu_spk ?? '' }}"
+    label="Keterangan Waktu SPK" rows="3"
+    phr="Pada hari ini . . . tanggal . . . bulan . . . tahun . . ., yang bertanda tangan di bawah ini :"></x-forms.textarea>
 <x-forms.input name="kode_perpanjangan" label="Kode Perpanjangan" phr="KOPER-20XX"
     item="{{ $masa_perpanjangan->kode_perpanjangan ?? '' }}"></x-forms.input>
 <x-forms.textarea name="judul" item="{{ $masa_perpanjangan->judul ?? '' }}" label="Judul"

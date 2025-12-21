@@ -91,7 +91,11 @@
                             <td>
                                 <div class="text-wrap" style="width: 150px">{{ $data_pegawai->unit_kerja }}</div>
                             </td>
-                            <td>{{ $data_pegawai->jenis_formasi }}</td>
+                            <td>
+                                {{ $data_pegawai->jenis_formasi }}
+                                <br>
+                                <span class="badge bg-success text-success-fg">{{ $data_pegawai->kode_angkatan }}</span>
+                            </td>
                             <td class="text-center">
                                 {{ $data_pegawai->tmt_awal->isoFormat('DD MMMM YYYY') }} s/d <br>
                                 {{ $data_pegawai->tmt_akhir->isoFormat('DD MMMM YYYY') }}

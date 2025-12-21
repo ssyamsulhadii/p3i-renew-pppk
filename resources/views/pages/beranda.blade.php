@@ -33,10 +33,16 @@
                                         {{ auth()->user()->nama }}
                                     </h3>
                                     <div class="text-muted">NIP: {{ auth()->user()->nip }}</div>
+                                    <div
+                                        class="badge bg-primary text-center text-white rounded-pill px-3 py-2 mt-2 d-md-none">
+                                        {{ auth()->user()->jenis_formasi }}
+                                    </div>
                                 </div>
                             </div>
-                            <span
-                                class="badge bg-blue text-white rounded-pill px-3 py-2">{{ auth()->user()->jenis_formasi }}</span>
+                            <span class="badge bg-primary text-white rounded-pill px-3 py-2 d-none d-lg-inline">
+                                {{ auth()->user()->jenis_formasi }}
+                            </span>
+
                         </div>
                     </div>
                 </div>

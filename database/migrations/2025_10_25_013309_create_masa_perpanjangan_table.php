@@ -21,6 +21,10 @@ return new class extends Migration
             $table->string('tte_kolektif')->nullable();
             $table->json('kode_angkatan');
             $table->boolean('is_active')->default(true);
+
+            $table->string('nama_pejabat')->nullable();
+            $table->string('nomor_spk')->nullable();
+            $table->string('keterangan_waktu_spk')->nullable();
             $table->timestamps();
         });
     }

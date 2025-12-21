@@ -30,7 +30,9 @@
                         <x-forms.input accept=".pdf" name="surat_sehat"
                             label="Surat Keterangan Sehat dari Lembaga Pemerintah" type="file">
                         </x-forms.input>
-
+                        <x-forms.selection-group name="is_relokasi" label="Apakah Anda Relokasi Unit Kerja"
+                            :items="$is_relokasi" item="">
+                        </x-forms.selection-group>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Simpan</button>

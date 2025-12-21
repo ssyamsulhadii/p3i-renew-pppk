@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 
 class FormDataRequest extends FormRequest
 {
@@ -37,6 +36,7 @@ class FormDataRequest extends FormRequest
             'sptjm' => [$isUpdate ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:1500'],
             'skp' => [$isUpdate ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:1500'],
             'rekap_absensi' => [$isUpdate ? 'nullable' : 'required', 'file', 'mimes:pdf', 'max:1500'],
+            'is_relokasi' => 'required|in:0,1',
             'status' => 'nullable',
             'is_done' => 'nullable',
             'user_id' => 'nullable',
@@ -50,6 +50,7 @@ class FormDataRequest extends FormRequest
             'file' => ':attribute harus berupa file yang valid.',
             'mimes' => ':attribute harus berupa file dengan format :values.',
             'max' => ':attribute maksimal berukuran 1000KB/1mb.',
+            'is_relokasi.required' => 'kolom relokasi wajib dipilih.',
         ];
     }
 }

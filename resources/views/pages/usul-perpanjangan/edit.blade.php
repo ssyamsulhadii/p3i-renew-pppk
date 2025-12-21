@@ -51,6 +51,9 @@
                             <x-others.alert-view-dokumen dokumen="{{ $kontrak_saya->sptjm }}"
                                 url="{{ $kontrak_saya->pathFile('sptjm') }}">
                             </x-others.alert-view-dokumen>
+                            <x-forms.selection-group name="is_relokasi" label="Apakah Anda Relokasi Unit Kerja"
+                                :items="$is_relokasi" item="{{ $kontrak_saya->is_relokasi }}">
+                            </x-forms.selection-group>
 
 
                         </div>

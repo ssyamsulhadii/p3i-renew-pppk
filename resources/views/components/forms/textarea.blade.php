@@ -1,5 +1,5 @@
 <div class="mb-3 mb-0">
-    <label class="form-label required" for="{{ $name }}">{{ $label }}</label>
+    <label class="form-label" for="{{ $name }}">{{ $label }}</label>
     <textarea id="{{ $name }}" name="{{ $name }}" rows="{{ $rows }}"
         class="form-control @error($name) is-invalid @enderror" placeholder="{{ $phr ?? '' }}">{!! old($name, $item ?? '') !!}</textarea>
     {{ $slot }}
